@@ -1,29 +1,82 @@
-### IntelliJ IDEA ###
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+## OUTPUTS
+# Maven target
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
 
-### Eclipse ###
+# Gradle build
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# WRAPPER DE MAVEN
+
+!.mvn/wrapper/maven-wrapper.jar
+
+## IDES
+# IntelliJ
+.idea/
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
 .apt_generated
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+.sts4-cache/
 
-### NetBeans ###
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
 
-### VS Code ###
+# VS Code
 .vscode/
 
-### Mac OS ###
+
+## OS
+# macOS
 .DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+## LOGS
+# Logs
+*.log
+
+# Test / Coverage
+coverage/
+*.lcov
+jacoco.exec
+
+## OTROS
+# Temps
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Lock
+*.lock
+
+
+## A MAYORES
+# .IDEA TE ODIO, git rm -r --cached .idea/ si sobrevive.
+*.idea/
