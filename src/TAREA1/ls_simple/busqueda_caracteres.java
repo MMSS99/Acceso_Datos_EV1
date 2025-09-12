@@ -22,7 +22,14 @@ public class busqueda_caracteres {
             String caracter = busqueda.nextLine();
             if (caracter.length() == 1) {
                 try {
-                    Files.readAllLines(ruta).forEach(System.out::println);
+                    //Files.readAllLines(ruta).forEach(linea -> linea.chars().filter(ch -> ch == caracter.charAt(0)).count());
+                    long contador = 0;
+                    for (String linea : Files.readAllLines(ruta)) {
+                        if (linea.contains(caracter)) {
+                            contador = contador + linea.chars().filter(ch -> ch == caracter.charAt(0)).count();
+                        }
+                    }
+                    System.out.println("El programa ha encontrado " + contador + " casos del carácter " + caracter);
                 } catch (IOException e){
                     e.printStackTrace();
                 }
@@ -39,4 +46,5 @@ public class busqueda_caracteres {
         }
 
     }
+    // C:\Users\MM\Desktop\ioreipsum.txt
 }
