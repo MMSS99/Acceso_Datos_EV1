@@ -20,13 +20,27 @@ public class ls_simple {
         } else {
             try {
                 for (Path archivo : Files.list(carpeta).toList()) {
-                    BasicFileAttributes atributos = Files.getFileAttributeView(archivo, BasicFileAttributeView.class).readAttributes();
-                    System.out.println(archivo.toString() + atributos.creationTime().toString());
-
+                    //BasicFileAttributes atributos = Files.getFileAttributeView(archivo, BasicFileAttributeView.class).readAttributes();
+                    resultado.append(Files.isDirectory(archivo) ? "d" : "-")
+                             .append(Files.isWritable(archivo) ? "w" : "-")
+                             .append(Files.isExecutable(archivo) ? "x" : "-")
+                             .append(Files.isReadable(archivo) ? "r" : "-")
+                             .append("\t\t")
+                             .append(Files.getOwner(archivo))
+                             .append("\t\t\t")
+                             .append(Files.size(archivo))
+                             .append("\t\t\t")
+                             .append(Files.getLastModifiedTime(archivo))
+                             .append("\t\t")
+                             .append(archivo.getFileName())
+                             .append("\n");
                 }
+                System.out.println(resultado.toString());
             } catch (IOException e) {
+                // me lo requería el linter
                 e.printStackTrace();
             }
         }
     }
+    // NOTA PARA YO DEL FUTURO: ls -R probablemente se pueda solucionar con Files.walk
 }
