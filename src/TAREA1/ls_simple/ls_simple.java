@@ -3,6 +3,8 @@ package TAREA1.ls_simple;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributeView;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Scanner;
 import java.nio.file.*;
 
@@ -18,7 +20,9 @@ public class ls_simple {
         } else {
             try {
                 for (Path archivo : Files.list(carpeta).toList()) {
-                    System.out.println(archivo);
+                    BasicFileAttributes atributos = Files.getFileAttributeView(archivo, BasicFileAttributeView.class).readAttributes();
+                    System.out.println(archivo.toString() + atributos.creationTime().toString());
+
                 }
             } catch (IOException e) {
                 e.printStackTrace();
