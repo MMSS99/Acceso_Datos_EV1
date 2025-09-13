@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class busqueda_caracteres {
@@ -39,6 +42,27 @@ public class busqueda_caracteres {
 
         } else if (confirmacion.equals("n")) {
             System.out.println("Iniciando conteo del caracter más usado...");
+            try {
+                HashMap<String, Integer> contadores = new HashMap<>();
+                for (String linea : Files.readAllLines(ruta)) {
+                    for (char caracter : linea.toCharArray()) {
+                        if (contadores.containsKey(String.valueOf(caracter))) {
+                            contadores.put(String.valueOf(caracter), contadores.get(String.valueOf(caracter)) + 1);
+                        } else {
+                            contadores.put(String.valueOf(caracter), 1);
+                        }
+                    }
+                }
+
+                Integer maxocurrencias = Collections.max(contadores.values());
+                for (Map.Entry<String, Integer> entry : contadores.entrySet()) {
+                    if (entry.getValue().equals(maxocurrencias)) {
+                        System.out.println("El caracter \"" + entry.getKey() + "\" es el más recurrente, con un total de " + maxocurrencias + " ocurrencias.");
+                    }
+                }
+            } catch (IOException e){
+                e.printStackTrace();
+            }
 
 
         } else {
