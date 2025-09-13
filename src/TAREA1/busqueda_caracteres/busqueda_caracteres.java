@@ -1,4 +1,4 @@
-package TAREA1.ls_simple;
+package TAREA1.busqueda_caracteres;
 
 import java.io.IOException;
 import java.nio.file.Files;
