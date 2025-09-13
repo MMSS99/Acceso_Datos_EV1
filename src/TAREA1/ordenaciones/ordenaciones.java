@@ -21,7 +21,8 @@ public class ordenaciones {
 
     private static void escribir_contenido(Path output, List<String> contenido) throws IOException{
         for (String linea : contenido) {
-            Files.writeString(output, linea, StandardOpenOption.APPEND);
+            System.out.println(linea);
+            Files.writeString(output, linea + "\n", StandardOpenOption.APPEND);
         }
     }
 
@@ -30,24 +31,24 @@ public class ordenaciones {
         Scanner entrada = new Scanner(System.in);
         Path ruta = Paths.get(entrada.nextLine());
 
-        System.out.print("¿Tipo de ordenación? [A(sdencente)/d(escendente)]");
+        System.out.print("¿Tipo de ordenación? [A(sdencente)/d(escendente)]: ");
         Scanner entrada_ordenacion = new Scanner(System.in);
-        Boolean ascendente = entrada_ordenacion.nextLine() != "d" ? Boolean.TRUE : Boolean.FALSE;
+        Boolean ascendente = !entrada_ordenacion.nextLine().equals("d") ? Boolean.TRUE : Boolean.FALSE;
 
-        System.out.print("¿Distinción entre mayúsculas y minúsculas? [S/n]");
+        System.out.print("¿Distinción entre mayúsculas y minúsculas? [S/n]: ");
         Scanner entrada_case = new Scanner(System.in);
-        Boolean case_sensitive = entrada_case.nextLine() != "n" ? Boolean.TRUE : Boolean.FALSE;
+        Boolean case_sensitive = !entrada_case.nextLine().equals("n") ? Boolean.TRUE : Boolean.FALSE;
 
         if (ascendente) {
             if (case_sensitive) {
                 Path output = nuevo_archivo(ruta, "_asc_case.txt");
                 //Files.readAllLines(ruta).stream().sorted().forEach(linea -> Files.writeString(output, linea, StandardOpenOption.APPEND)); Unhandled exception??????
-                List<String> contenido = Files.readAllLines(output).stream().sorted().toList();
+                List<String> contenido = Files.readAllLines(ruta).stream().sorted().toList();
                 escribir_contenido(output, contenido);
 
             } else {
                 Path output = nuevo_archivo(ruta, "_asc_non_case.txt");
-                List<String> contenido = Files.readAllLines(output).stream().sorted(String.CASE_INSENSITIVE_ORDER).toList();
+                List<String> contenido = Files.readAllLines(ruta).stream().sorted(String.CASE_INSENSITIVE_ORDER).toList();
                 escribir_contenido(output, contenido);
 
             }
@@ -55,11 +56,11 @@ public class ordenaciones {
         } else {
             if (case_sensitive) {
                 Path output = nuevo_archivo(ruta, "_des_case.txt");
-                List<String> contenido = Files.readAllLines(output).stream().sorted().toList().reversed();
+                List<String> contenido = Files.readAllLines(ruta).stream().sorted().toList().reversed();
                 escribir_contenido(output, contenido);
             } else {
                 Path output = nuevo_archivo(ruta, "_des_non_case.txt");
-                List<String> contenido = Files.readAllLines(output).stream().sorted(String.CASE_INSENSITIVE_ORDER).toList().reversed();
+                List<String> contenido = Files.readAllLines(ruta).stream().sorted(String.CASE_INSENSITIVE_ORDER).toList().reversed();
                 escribir_contenido(output, contenido);
             }
 
